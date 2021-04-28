@@ -149,6 +149,8 @@ sample.random.pairs <- function(df, n, max.pairs.male, max.pairs.female) {
 ##                                                                            ##
 ## matrix <- matrix[-c(1, 2), -2]  # Drop empty column and row                ##
 ##                                                                            ##
+## library(tidyr)                                                             ##
+##                                                                            ##
 ## df <- gather(matrix,                                                       ##
 ##              key   = "male_band",                                          ##
 ##              value = "MSI",                                                ##
@@ -157,6 +159,8 @@ sample.random.pairs <- function(df, n, max.pairs.male, max.pairs.female) {
 ## names(df)[names(df) == "UniqueID"] <- "female_band"                        ##
 ##                                                                            ##
 ## df[] <- lapply(df, as.character)                                           ##
+##                                                                            ##
+## rownames(df) <- 1:(nrow(df))  # Assign row names from 1 to nrow            ##
 ##                                                                            ##
 ## sample.random.pairs(df = df,                                               ##
 ##                     n = 16,                                                ##
