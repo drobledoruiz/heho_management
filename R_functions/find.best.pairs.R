@@ -1,11 +1,11 @@
 ################################################################################
-##        Function to select the best n pairs (those with lowest MSI).        ##
+##         Function to find the best n pairs (those with lowest MSI)          ##
 ##                                                                            ##
 ##  Author: Diana Robledo-Ruiz. PhD student, Monash University                ##
 ##  Date: 2020-03-12                                                          ##
 ##                                                                            ##
 ## This function requires:                                                    ##
-##   - Input: an MSI matrix extracted from PMx                                ##
+##   - Input: a matrix of pairs in vertical format (df)                       ##
 ##   - User specified parameters:                                             ##
 ##       - n = number of pairs to select                                      ##
 ##       - max.pairs.(fe)male = maximum number of pairs a (fe)male can have   ##
@@ -15,8 +15,9 @@
 ## Index:                                                                     ##
 ##   Line 24: Function drop.males                                             ##
 ##   Line 73: Function drop.females                                           ##
-##   Line 122: Main function select.best.pairs                                ##
-##   Line 190: Example of use for select.best.pairs                           ##
+##   Line 122: Main function find.best.pairs                                  ##
+##   Line 190: Example of use for find.best.pairs (with recommended           ##
+##             pre-treatment)                                                 ##
 ################################################################################
 
 
@@ -119,32 +120,11 @@ drop.females <- function(selection, max.pairs.female){
 ################################################################################
 
 
-################### Defining main function SELECT BEST PAIRS ###################
-select.best.pairs <- function(file, n, max.pairs.male, max.pairs.female) {
-  
-  ##### Import the file directly obtained from PMx
-  matrix <- read.table(file,
-                       sep = "\t",
-                       header = FALSE)
-  
-  names(matrix) <- lapply(matrix[1, ], as.character)
-  
-  matrix <- matrix[-c(1, 2), -2]  # Drop empty column and row
-  
-  ##### Make MSI matrix a vertical dataframe with appropriate format
-  df <- gather(matrix, 
-               key   = "male_band", 
-               value = "MSI", 
-               -UniqueID)  # Exclude the 1st column ("UniqueID") = males
-  
-  names(df)[names(df) == "UniqueID"] <- "female_band"  # Change name of 1st column
-  
-  df[] <- lapply(df, as.character)  # Make all columns character
-  
+#################### Defining main function FIND BEST PAIRS ####################
+find.best.pairs <- function(df, n, max.pairs.male, max.pairs.female) {
+   
   df <- df[order(df$MSI), ]  # Sort dataframe by MSI (lowest first)
-  
-  rownames(df) <- 1:(nrow(df))  # Assign row names from 1 to nrow
-  
+   
   ##### Select the first n pairs
   sel <- df[1:n,]
   print(paste("Number of initial pairs:" , nrow(sel)))
@@ -188,10 +168,28 @@ select.best.pairs <- function(file, n, max.pairs.male, max.pairs.female) {
 
 
 ################################ Example of use ################################
-## select.best.pairs(file = "C:/Users/drob0006/Google Drive/Projects/         ##
-##                           1.MateChoice_BreedingManagement/Analyses2020/    ##
-##                           4_2020.24.02_MSI_PMx/Output_files/2011.2012/     ##
-##                           MSI_matrix_2011.2012_Blue.txt",                  ##
+## matrix <- read.table(file = "matrix.txt",                                  ##                                    
+##                       sep = "\t",                                          ##
+##                       header = FALSE)                                      ##
+##                                                                            ##
+## names(matrix) <- lapply(matrix[1, ], as.character)                         ##
+##                                                                            ##
+## matrix <- matrix[-c(1, 2), -2]  # Drop empty column and row                ##
+##                                                                            ##
+## library(tidyr)                                                             ##
+##                                                                            ##
+## df <- gather(matrix,                                                       ##
+##              key   = "male_band",                                          ##
+##              value = "MSI",                                                ##
+##              -UniqueID)  # Exclude the 1st column ("UniqueID") = males     ##
+##                                                                            ##
+## names(df)[names(df) == "UniqueID"] <- "female_band"  # Name 1st column     ##
+##                                                                            ##
+## df[] <- lapply(df, as.character)  # Make all columns character             ##
+##                                                                            ##
+## rownames(df) <- 1:(nrow(df))  # Assign row names from 1 to nrow            ##
+##                                                                            ##
+## find.best.pairs(df = df,                                                   ##
 ##                   n = 16,                                                  ##
 ##                   max.pairs.male = 4,                                      ##
 ##                   max.pairs.female = 3)                                    ##
