@@ -5,7 +5,7 @@
 ##  Date: 2020-03-19                                                          ##
 ##                                                                            ##
 ## This function requires:                                                    ##
-##   - Input: a dataframe of pairs                                            ##
+##   - Input: a matrix of pairs in vertical format (df)                       ##
 ##   - User specified parameters:                                             ##
 ##       - n = number of pairs to select                                      ##
 ##       - max.pairs.(fe)male = maximum number of pairs a (fe)male can have   ##
@@ -141,10 +141,7 @@ sample.random.pairs <- function(df, n, max.pairs.male, max.pairs.female) {
 
 
 ############### Example of use (with recommended pre-treatment) ################
-## matrix <- read.table(file = "C:/Users/drob0006/Google Drive/Projects       ##
-##                             1.MateChoice_BreedingManagement/Analyses2020/  ##
-##                             4_2020.24.02_MSI_PMx/Output_files/2011.2012/   ##
-##                             MSI_matrix_2011.2012_Blue.txt",                ##
+## matrix <- read.table(file = "matrix.txt",                                  ##
 ##                      sep = "\t",                                           ##
 ##                      header = FALSE)                                       ##
 ##                                                                            ##
