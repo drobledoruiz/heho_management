@@ -16,7 +16,7 @@
 ##   Line 24: Function drop.males                                             ##
 ##   Line 73: Function drop.females                                           ##
 ##   Line 122: Main function find.best.pairs                                  ##
-##   Line 190: Example of use for find.best.pairs (with recommended           ##
+##   Line 170: Example of use for find.best.pairs (with recommended           ##
 ##             pre-treatment)                                                 ##
 ################################################################################
 
