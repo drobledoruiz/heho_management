@@ -4,7 +4,7 @@ In this repository you find the functions and code to run simulations as present
 1. Asses the presence and degree of inbreeding avoidance: _sample.random.pairs_ and _find.best.pairs_
 2. Estimate the potential benefits of implementing the breeding management strategy proposed by Robledo-Ruiz et al. (_submitted_): _select.pairs2split_ and _re.pair.lowest.avMSI_.
 
-Contact: diana.robledoruiz@monash.edu
+Contact: Diana Robledo-Ruiz, diana.robledoruiz@monash.edu
 
 --------------------------------------------------------------
 The functions _sample.random.pairs_ and _find.best.pairs_ are used per site in a population (a population may be divided in multiple social subgroups: "sites"). They require as input an MSI matrix (for the site) in vertical format (dataframe) with each row pertaining to one male-female pair and their MSI score. The columns should be named: 
