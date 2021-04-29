@@ -87,3 +87,5 @@ The function _re.pair.lowest.avMSI_ is used for an entire population that is div
       - First column "female_band": ID of female
       - Second column "male_band": ID of male
       - Third column "MSI_df": MSI score of that pair
+
+The output is a a list with as many dataframes as sites. Each dataframe contains the individuals to keep in the population (not remove).
