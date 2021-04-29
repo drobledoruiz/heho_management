@@ -37,7 +37,7 @@ If you have a matrix with females as columns and males as rows (as the one obtai
 
 ---------------------------------------------------------------------------------------
 
-The function _select.pairs2split_ is used for an entire population that is devided in social subgroups (sites). It requires as input 6 items:
+The function _select.pairs2split_ is used for an entire population that is divided in social subgroups (sites). It requires as input 6 items:
   1. actual= a dataframe of pairs occuring in the population with the next columns:
       - "female_band": female ID as character
       - "male_band": male ID as character
@@ -54,13 +54,13 @@ The function _select.pairs2split_ is used for an entire population that is devid
       - "Sex": the sex of the individual. All individuals in a dataframe should have the same sex.
 
   4. MSI_df= the MSI matrix (for the whole population) in vertical format (dataframe) with each row pertaining to one male-female pair and their MSI score. The columns should be named: 
-    - First column "female_band": ID of female
-    - Second column "male_band": ID of male
-    - Third column "MSI_df": MSI score of that pair
+      - First column "female_band": ID of female
+      - Second column "male_band": ID of male
+      - Third column "MSI_df": MSI score of that pair
 
   5. pivot= a dataframe with the count of the number of singles per site, per sex. It should have the columns:
-    - "site": in the example of two sites, values from top to bottom would be "A" "A" "B" "B"
-    - "sex": first females and then males. In the example of two sites, values form top to bottom would be "F" "M" "F" "M"
-    - "singles": the count of singles per site and sex
+      - "site": in the example of two sites, values from top to bottom would be "A" "A" "B" "B"
+      - "sex": first females and then males. In the example of two sites, values form top to bottom would be "F" "M" "F" "M"
+      - "singles": the count of singles per site and sex
 
   6. prop.split= the maximum proportion of pairs that can be split per site. . Examples: 0.25 or 1/3
