@@ -190,10 +190,10 @@ select.pairs2split <- function(actual, MSI.split, singles, MSI_df, pivot, prop.s
 
 
 ################################ Example of use ################################
-## select.pairs2split(actual = actual_all[actual_all$season == "14_15", ],    ##
+## select.pairs2split(actual = actual_all,                                    ##
 ##                    MSI.split = c(5,6),                                     ##
-##                    singles = singles_all[[4]],                             ##
+##                    singles = singles_all,                                  ##
 ##                    MSI_df = MSI_df,                                        ##
-##                    pivot = droplevels(pivot_all[pivot_all$season == "2014/2015", ]),
+##                    pivot = pivot_all                                       ##
 ##                    prop.split = 1/4)                                       ##
 ################################################################################
