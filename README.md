@@ -1,9 +1,12 @@
-# Evaluating a breeding management strategy and population-level inbreeding avoidance for the wild population of Helmeted Honeyeater
+# Functions to evaluate the potential benefits of a breeding management strategy for wild populations
 
-In this repository you can find the functions and code to run simulations of a breeding management strategy and different levels of inbreeding avoidance as presented in Robledo-Ruiz et al. (_submitted_) "Testing a novel _in-situ_ breeding management strategy for a critically endangered population".
+In this repository you find the functions and code to run simulations to:
+1. Asses the presence and degree of inbreeding avoidance: _sample.random.pairs_ and _find.best.pairs_
+2. Estimate the potential benefits of implementing the breeding management strategy proposed by Robledo-Ruiz et al. (_submitted_) "Testing a novel _in-situ_ breeding management strategy for a critically endangered population": _select.pairs2split_ and _re.pair.lowest.avMSI_.
+
+Contact: diana.robledoruiz@monash.edu
 
 --------------------------------------------------------------
-
 The functions _sample.random.pairs_ and _find.best.pairs_ are used per site in a population (a population may be divided in multiple social subgroups: "sites"). They require as input an MSI matrix (for the site) in vertical format (dataframe) with each row pertaining to one male-female pair and their MSI score. The columns should be named: 
   - First column "female_band": ID of female
   - Second column "male_band": ID of male
@@ -13,6 +16,7 @@ If you have a matrix with females as columns and males as rows (as the one obtai
   - Make sure the first column (that should contain male IDs) is named "UniqueID"
   - Follow the next script:
 
+```
   ##### Import the file directly obtained from PMx
   matrix <- read.table(file,
                        sep = "\t",
@@ -34,9 +38,10 @@ If you have a matrix with females as columns and males as rows (as the one obtai
   df[] <- lapply(df, as.character)  # Make all columns character
   
   rownames(df) <- 1:(nrow(df))  # Assign row names from 1 to nrow
+```
+
 
 ---------------------------------------------------------------------------------------
-
 The function _select.pairs2split_ is used for an entire population that is divided in social subgroups (sites). It requires as input 6 items:
   1. actual= a dataframe of pairs occuring in the population with the next columns:
       - "female_band": female ID as character
@@ -64,3 +69,21 @@ The function _select.pairs2split_ is used for an entire population that is divid
       - "singles": the count of singles per site and sex
 
   6. prop.split= the maximum proportion of pairs that can be split per site. . Examples: 0.25 or 1/3
+
+It outputs a list with as many dataframes as sites (used as input in the next function _re.pair.lowest.avMSI_). Each dataframe contains the pairs that should be split per site.
+
+
+
+--------------------------------------------------
+The function _re.pair.lowest.avMSI_ is used for an entire population that is divided in social subgroups (sites). It is the next step after using _select.pairs2split_ and it tells you which individual to keep in the population (not remove) from the pairs that were selected to split in the previous step (it also tells you the potential average MSI that the individual that you keep will have). It requires as input 3 items:
+  1. drop= the output of the previous step _select.pairs2split_ which is a list with as many dataframes as sites. Each dataframe contains the pairs that were selected to be split per site.
+ 
+  2. singles= the same item that was used by _select.pairs2split_. It is the data of the individuals that are present in the population but not engaged in a pair (aka singles). This should be a list that contains as many sublists as sites there are in actual. Each sublist should have two dataframes (first dataframe for single females, second dataframe for single males). This means that if there are two sites, A and B, there should be four dataframes (singles[[1]] is the sublist for site A, with singles[[1]][[1]] being the dataframe for single females, and singles[[1]][[2]] the dataframe for single males; singles[[2]] is the sublist for site B, with singles[[2]][[1]] being the dataframe for single females, and singles[[2]][[2]] the dataframe for single males). Each dataframe should have the columns:
+      - "Site": the site of the pairs. All individuals in a dataframe should have the same site.
+      - "Band": the ID of the individual.
+      - "Sex": the sex of the individual. All individuals in a dataframe should have the same sex.
+
+  3. MSI_df= the same item that was used by _select.pairs2split_. It is the MSI matrix (for the whole population) in vertical format (dataframe) with each row pertaining to one male-female pair and their MSI score. The columns should be named: 
+      - First column "female_band": ID of female
+      - Second column "male_band": ID of male
+      - Third column "MSI_df": MSI score of that pair
