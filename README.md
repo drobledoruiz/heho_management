@@ -2,7 +2,7 @@
 
 In this repository you find the functions and code to run simulations as presented in Robledo-Ruiz et al. (_submitted_) "Testing a novel _in-situ_ breeding management strategy for a critically endangered population". With these functions you can:
 1. Asses the presence and degree of inbreeding avoidance: _sample.random.pairs_ and _find.best.pairs_
-2. Estimate the potential benefits of implementing the breeding management strategy proposed by Robledo-Ruiz et al. (_submitted_): _select.pairs2split_ and _re.pair.lowest.avMSI_.
+2. Estimate the potential benefits of implementing the breeding management strategy proposed by Robledo-Ruiz et al. (_submitted_): _select.pairs2split_, _re.pair.lowest.avMSI_ and _translocate.removed_.
 
 Contact: Diana Robledo-Ruiz, diana.robledoruiz@monash.edu
 
@@ -89,3 +89,26 @@ The function _re.pair.lowest.avMSI_ is used for an entire population that is div
       - Third column "MSI_df": MSI score of that pair
 
 The output is a a list with as many dataframes as sites. Each dataframe contains the individuals to keep in the population (not remove).
+
+
+
+--------------------------------------------------
+The function _translocate.removed_ is used for an entire population that is divided in social subgroups (sites). It is the next step after using _re.pair.lowest.avMSI_ and it tells you to which site to translocate the individuals you removed (from the pairs that were selected to split). It chooses the site for which the individual has the lowest average MSI with the singles in the site (it tells you the potential average MSI and kinship). It requires as input 5 items:
+  1. re.pair= the output of the previous step _re.pair.lowest.avMSI_. It is a list of vectors, each vector with the ID of the individuals to keep in the population (not remove).
+ 
+  2. drop= the output of the step _select.pairs2split_ which is a list with as many dataframes as sites. Each dataframe contains the pairs that were selected to be split per site.
+ 
+  3. singles= the same item that was used by _select.pairs2split_ and _re.pair.lowest.avMSI_. It is the data of the individuals that are present in the population but not engaged in a pair (aka singles). This should be a list that contains as many sublists as sites there are in actual. Each sublist should have two dataframes (first dataframe for single females, second dataframe for single males). This means that if there are two sites, A and B, there should be four dataframes (singles[[1]] is the sublist for site A, with singles[[1]][[1]] being the dataframe for single females, and singles[[1]][[2]] the dataframe for single males; singles[[2]] is the sublist for site B, with singles[[2]][[1]] being the dataframe for single females, and singles[[2]][[2]] the dataframe for single males). Each dataframe should have the columns:
+      - "Site": the site of the pairs. All individuals in a dataframe should have the same site.
+      - "Band": the ID of the individual.
+      - "Sex": the sex of the individual. All individuals in a dataframe should have the same sex.
+
+  4. MSI_df= the same item that was used by _select.pairs2split_ and _re.pair.lowest.avMSI_. It is the MSI matrix (for the whole population) in vertical format (dataframe) with each row pertaining to one male-female pair and their MSI score. The columns should be named: 
+      - First column "female_band": ID of female
+      - Second column "male_band": ID of male
+      - Third column "MSI_df": MSI score of that pair
+
+  5.  MSI_df= the pair-kinship matrix (for the whole population) in vertical format (dataframe) with each row pertaining to one male-female pair and their pair-kinship value. The columns should be named: 
+      - First column "female_band": ID of female
+      - Second column "male_band": ID of male
+      - Third column "kinship": MSI score of that pair
