@@ -17,7 +17,7 @@ If you have a matrix with females as columns and males as rows (as the one obtai
   - Follow the next script:
 
 ```
-  ##### Import the file directly obtained from PMx
+  # Import the file directly obtained from PMx
   matrix <- read.table(file,
                        sep = "\t",
                        header = FALSE)
@@ -26,7 +26,7 @@ If you have a matrix with females as columns and males as rows (as the one obtai
   
   matrix <- matrix[-c(1, 2), -2]  # Drop empty column and row
   
-  ##### Make MSI matrix a vertical dataframe with appropriate format
+  # Make MSI matrix a vertical dataframe with appropriate format
   library(tidyr)
   df <- gather(matrix, 
                key   = "male_band", 
