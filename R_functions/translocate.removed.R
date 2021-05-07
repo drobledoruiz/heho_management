@@ -16,7 +16,7 @@
 ##     the beginning of this script                                           ##
 ##                                                                            ##
 ## Index:                                                                     ##
-##   Line 25: Function identify.removed.ind                                   ##
+##   Line 26: Function identify.removed.ind                                   ##
 ##   Line 47: Main function translocate.removed                               ##
 ##   Line 432: Example of use for translocate.removed                         ##
 ################################################################################
@@ -434,6 +434,7 @@ translocate.removed <- function(re.pair, drop, singles, MSI_df, kin_df) {
 ## translocate.removed(re.pair = re.pair,                                     ##
 ##                     drop = drop,                                           ##
 ##                     singles = singles,                                     ##
-##                     MSI_df = MSI_df)                                       ##
+##                     MSI_df = MSI_df,                                       ##
+##                     kin_df = kind_df)                                      ##
 ################################################################################
 
