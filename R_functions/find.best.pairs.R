@@ -13,10 +13,10 @@
 ##     the beginning of this script                                           ##
 ##                                                                            ##
 ## Index:                                                                     ##
-##   Line 24: Function drop.males                                             ##
-##   Line 73: Function drop.females                                           ##
-##   Line 122: Main function find.best.pairs                                  ##
-##   Line 170: Example of use for find.best.pairs (with recommended           ##
+##   Line 25: Function drop.males                                             ##
+##   Line 62: Function drop.females                                           ##
+##   Line 99: Main function find.best.pairs                                  ##
+##   Line 146: Example of use for find.best.pairs (with recommended           ##
 ##             pre-treatment)                                                 ##
 ################################################################################
 
@@ -31,39 +31,27 @@ drop.males <- function(selection, max.pairs.male) {
   # Identify ID of males
   males <- unique(selection[, "male_band"])
   
-  # Count how many times each male is present and store info in list:
-  male_info <- list()
-  
+  # Count how many times each male is present and drop extras
   for (i in 1:length(males)) {
-    ###print(paste(males[i], nrow(selection[selection$male_band == males[i],])));
-    # Store its name and how may times it appeared
-    male_info[[i]] <- c(males[i], 
-                        nrow(selection[selection$male_band == males[i],]));
     
-    # If it is present less than maximum, leave it alone
-    if (male_info[[i]][2] <= max.pairs.male) {
-      print(paste("Male", 
-                  male_info[[i]][1], 
-                  "is okay."))
-      
-      # Otherwise (present more than limit):
-    } else {
-      print(paste("Male", 
-                  male_info[[i]][1], 
-                  "is present too many times:", 
-                  male_info[[i]][2], 
-                  "times."));
+    # Store how may times it appeared
+    male_info <- nrow(selection[selection$male_band == males[i],]);
+    
+    # If it is present more than maximum
+    if (male_info > max.pairs.male) {
       
       # Identify rows in which that male is present in selected pairs
-      rows <- which(grepl(male_info[[i]][1], selection$male_band));
+      rows <- which(grepl(males[i], selection$male_band));
       
       # Store the identifier of "extra" rows (i.e. the ones to drop)
-      male_info[[i]] <- c(male_info[[i]], rows[(max.pairs.male+1):length(rows)])
-    }
+      rows2drop <- rows[(max.pairs.male+1):length(rows)]
     
-    # Drop those extra rows from selected pairs
-    if (length(male_info[[i]]) >= 3)
-      selection <- selection[-c(male_info[[i]][3]:male_info[[i]][length(male_info[[i]])]),]
+      # Drop those extra rows from selected pairs
+      selection <- selection[-c(rows2drop), ]
+      
+      # Delete the vector
+      rm(rows2drop)
+    }
   }
   
   return(selection)
@@ -75,44 +63,32 @@ drop.males <- function(selection, max.pairs.male) {
 ## This function identifies females that are present in more than the max. 
 ## number of pairs and drops the "extra" pairs
 
-drop.females <- function(selection, max.pairs.female){
+drop.females <- function(selection, max.pairs.female) {
   
   # Identify ID of females
   females <- unique(selection[, "female_band"])
   
-  # Count how many times each female is present and store info in list:
-  female_info <- list()
-  
-  for (i in 1:length(females)){
-    ##print(paste(females[i], nrow(selection[selection$female_band == females[i],])));
-    # Store its name and how may times it appeared
-    female_info[[i]] <- c(females[i], 
-                          nrow(selection[selection$female_band == females[i],]));
+  # Count how many times each female is present and drop extras
+  for (i in 1:length(females)) {
     
-    # If it is present less than maximum, leave it alone
-    if (female_info[[i]][2] <= max.pairs.female){
-      print(paste("Female", 
-                  female_info[[i]][1], 
-                  "is okay."))
-      
-      # Otherwise (present more than limit):
-    } else {
-      print(paste("Female", 
-                  female_info[[i]][1], 
-                  "is present too many times:", 
-                  female_info[[i]][2], 
-                  "times."));
+    # Store how may times it appeared
+    female_info <- nrow(selection[selection$female_band == females[i],]);
+    
+    # If it is present more than maximum
+    if (female_info > max.pairs.female) {
       
       # Identify rows in which that female is present in selected pairs
-      rows <- which(grepl(female_info[[i]][1], selection$female_band));
+      rows <- which(grepl(females[i], selection$female_band));
       
       # Store the identifier of "extra" rows (i.e. the ones to drop)
-      female_info[[i]] <- c(female_info[[i]], rows[(max.pairs.female+1):length(rows)])
-    }
+      rows2drop <- rows[(max.pairs.female+1):length(rows)]
     
-    # Drop those extra rows from selected pairs
-    if (length(female_info[[i]]) >= 3)
-      selection <- selection[-c(female_info[[i]][3]:female_info[[i]][length(female_info[[i]])]),]
+      # Drop those extra rows from selected pairs
+      selection <- selection[-c(rows2drop), ]
+      
+      # Delete the vector
+      rm(rows2drop)
+    }
   }
   
   return(selection)
