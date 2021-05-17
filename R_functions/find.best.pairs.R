@@ -108,10 +108,10 @@ find.best.pairs <- function(df, n, max.pairs.male, max.pairs.female) {
   used_pairs <- n
   
   ##### First round of dropping males/females
-  sel <- drop.males(selection = sel, max.pairs = max.pairs.male)
+  sel <- drop.males(selection = sel, max.pairs.male = max.pairs.male)
   print(paste("Number of pairs left after dropping males:", nrow(sel)))
   
-  sel <- drop.females(selection = sel, max.pairs = max.pairs.female)
+  sel <- drop.females(selection = sel, max.pairs.female = max.pairs.female)
   print(paste("Number of pairs left after dropping females:", nrow(sel)))
   
   
@@ -127,9 +127,9 @@ find.best.pairs <- function(df, n, max.pairs.male, max.pairs.female) {
     sel <- rbind(sel, df[next_pairs,])
     
     # Drop males/females if repeated too many times
-    sel <- drop.males(selection = sel, max.pairs = max.pairs.male)
+    sel <- drop.males(selection = sel, max.pairs.male = max.pairs.male)
     print(paste("Number of pairs left after dropping males:", nrow(sel)))
-    sel <- drop.females(selection = sel, max.pairs = max.pairs.female)
+    sel <- drop.females(selection = sel, max.pairs.female = max.pairs.female)
     print(paste("Number of pairs left after dropping females:", nrow(sel)))
     
     # Spit out finishing message
