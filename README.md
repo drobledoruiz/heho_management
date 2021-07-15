@@ -1,8 +1,8 @@
-# Functions to evaluate the potential benefits of a breeding management strategy for wild populations
+# Functions to evaluate the potential benefits of two breeding management strategies for wild populations
 
-In this repository you find the functions and code to run simulations as presented in Robledo-Ruiz et al. (_submitted_) "Testing a novel _in-situ_ breeding management strategy for a critically endangered population". With these functions you can:
+In this repository you find the functions and code to run simulations as presented in Robledo-Ruiz et al. (_submitted_) "A novel framework for evaluating _in-situ_ breeding management strategies in endangered populations". With these functions you can:
 1. Asses the presence and degree of inbreeding avoidance: _sample.random.pairs_ and _find.best.pairs_
-2. Estimate the potential benefits of implementing the breeding management strategy proposed by Robledo-Ruiz et al. (_submitted_): _select.pairs2split_, _re.pair.lowest.avMSI_ and _translocate.removed_.
+2. Estimate the potential benefits of implementing the two breeding management strategies proposed by Robledo-Ruiz et al. (_submitted_): _select.pairs2split_, _re.pair.lowest.avMSI_ and _translocate.removed_.
 
 Contact: Diana Robledo-Ruiz, diana.robledoruiz@monash.edu
 
