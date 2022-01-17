@@ -12,6 +12,8 @@ The functions _sample.random.pairs_ and _find.best.pairs_ are used per site in a
   - Second column "male_band": ID of male
   - Third column "MSI": MSI score of that pair
 
+ATTENTION! The functions only work well with dataframes (NOT with tibbles!).
+
 If you have a matrix with females as columns and males as rows (as the one obtained from PMx), and want to make it vertical:
   - Make sure the first column (that should contain male IDs) is named "UniqueID"
   - Follow the next script:
