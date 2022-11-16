@@ -2,9 +2,9 @@
 
 In this repository you find the functions and code to run simulations as presented in Robledo-Ruiz et al. (2021) "A novel framework for evaluating _in-situ_ breeding management strategies in endangered populations" _Molecular Ecology Resources_. With these functions you can:
 1. Asses the presence and degree of inbreeding avoidance: _sample.random.pairs_ and _find.best.pairs_
-2. Estimate the potential benefits of implementing the two breeding management strategies proposed by Robledo-Ruiz et al. (_submitted_): _select.pairs2split_, _re.pair.lowest.avMSI_ and _translocate.removed_.
+2. Estimate the potential benefits of implementing the two breeding management strategies proposed by Robledo-Ruiz et al. (2021): _select.pairs2split_, _re.pair.lowest.avMSI_ and _translocate.removed_.
 
-Contact: Diana Robledo-Ruiz, diana.robledoruiz@monash.edu
+Contact: Diana Robledo-Ruiz, diana.robledoruiz1@monash.edu
 
 --------------------------------------------------------------
 The functions _sample.random.pairs_ and _find.best.pairs_ are used per site in a population (a population may be divided in multiple social subgroups: "sites"). They require as input an MSI matrix (for the site) in vertical format (dataframe) with each row pertaining to one male-female pair and their MSI score. The columns should be named: 
